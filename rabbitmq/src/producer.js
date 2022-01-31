@@ -11,15 +11,12 @@ amqp.connect('amqp://localhost', function(error0, connection) {
         var queue = 'hello';
         var msg = 'Hello rabbit MQ';
 
-        channel.assertQueue(queue, {
-        durable: false
-        });
-
-        channel.sendToQueue(queue, Buffer.from(msg));
+        channel.assertQueue(queue, {durable: true});
+        channel.sendToQueue(queue, Buffer.from(msg), {persistent: true});
         console.log(" [x] Sent %s", msg);
     });
 
-    setTimeout(() => {
+    setTimeout(() => { 
         connection.close();
         process.exit(0)
     }, 500);

@@ -12,7 +12,7 @@ amqp.connect('amqp://localhost', function(error0, connection) {
     console.log('connecting to hello queue...')
 
     channel.assertQueue(queue, {
-      durable: false
+      durable: true
     });
 
     let option = {noAck:true};
@@ -21,6 +21,6 @@ amqp.connect('amqp://localhost', function(error0, connection) {
     channel.consume(queue, function(msg) {
       console.log(" [x] Received %s", msg.content.toString());
     }, option);
-    
+
   });
 });
